@@ -1,6 +1,10 @@
 # JPMorgan Chase Bank Valuation and Risk Model
 
-An AI-assisted financial model of JPMorgan Chase & Co. (NYSE: JPM) that forecasts earnings and regulatory capital through 2031, values the equity three ways, and stress-tests the result under Base, Bull and Bear scenarios.
+An independent, AI-assisted financial model of JPMorgan Chase & Co. (NYSE: JPM). Starting from reported data in SEC filings (FY2020 to 9M 2026), it:
+
+- forecasts the bank's earnings and regulatory capital (CET1) through FY2031,
+- values the equity three ways: FCFE DCF, residual income and justified price-to-tangible-book,
+- stress-tests the result under Base, Bull and Bear scenarios, with sensitivity and tornado analysis.
 
 The workbook is generated in Python with `openpyxl`. Every forecast and valuation cell is a live Excel formula, so any input can be changed in Excel and the model updates.
 
@@ -25,8 +29,8 @@ The workbook is generated in Python with `openpyxl`. Every forecast and valuatio
 
 A bank's deposits and debt are its raw material, not its financing, so a standard free-cash-flow DCF with WACC does not apply. This model follows the approach bank analysts use:
 
-- **Revenue** = average assets x net interest yield, plus fee income.
-- **Costs** = revenue x efficiency ratio, plus credit-loss provisions on average loans.
+- **Revenue** = average assets × net interest yield, plus fee income.
+- **Costs** = revenue × efficiency ratio, plus credit-loss provisions on average loans.
 - **Cash flow to shareholders (FCFE)** = net income minus the capital that must be retained to hold a target CET1 ratio as risk-weighted assets grow.
 - **Discount rate** = cost of equity (CAPM), valuing equity directly rather than the enterprise.
 
@@ -38,7 +42,7 @@ Reported operating cash flow is shown only as a memo line: it swung from +$107B 
 | --- | --- |
 | Cover | Live headline outputs, forecast snapshot, model map, methodology |
 | Historicals | FY2020 to FY2025 and 9M 2026 reported data, with a net-income tie-out check |
-| Assumptions | Scenario switch (cell C4), 4Q26 bridge, nine drivers x three scenarios x five years, shock cells |
+| Assumptions | Scenario switch (cell C4), 4Q26 bridge, nine drivers × three scenarios × five years, shock cells |
 | Forecast | Income statement FY2026E to FY2031E, EPS, ROE, ROTCE |
 | Capital & Cash Flow | CET1 roll-forward, RWA, FCFE, dividends, buybacks, share count, tangible book value |
 | Valuation | CAPM cost of equity, FCFE DCF, residual income, justified P/TBV, blended value |
@@ -83,8 +87,8 @@ The model was built with Claude (Anthropic) as an analytical assistant:
 
 ## Data sources
 
-- SEC EDGAR XBRL company-concept API, CIK 0000019617 (FY2020 to FY2025 financials)
-- JPMorgan Chase Annual Reports (2022, 2025) and Form 10-K filings
+- SEC EDGAR XBRL company-concept API, CIK 0000019617 (FY2021 to FY2025 income statement, assets, deposits, equity, per-share data, buybacks, cash flow)
+- JPMorgan Chase Annual Reports (2022, 2025): loans, common equity and CET1 ratios, including FY2020 balances
 - Form 10-Q and earnings release for the quarter ended September 30, 2026
 - Share price and 10-year Treasury yield as of November 16, 2026; beta from Yahoo Finance (5-year monthly)
 
